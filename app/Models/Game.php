@@ -23,4 +23,4 @@ class Game extends Model
         return $this -> belongsTo (Party::class);        
     }
 }
-}
+
