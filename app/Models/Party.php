@@ -9,11 +9,17 @@ class Party extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'game_id'
+    ];
+
     public function message (){
-        return $this -> hasMany(Comments::class);
+        return $this -> hasMany(Message::class);
     }
 
     public function partyuser (){
         return $this -> belongsTo(PartyUser::class);
     }
+
 }
