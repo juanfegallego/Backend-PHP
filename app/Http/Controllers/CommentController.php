@@ -57,9 +57,21 @@ class CommentController extends Controller
      * @param  \App\Models\Comment $comment
      * @return \Illuminate\Http\Response
      */
-    public function show(Comment $comment)
+    public function show($id)
     {
-        //
+        $comment = auth()->user()->posts()->find($id);
+
+        if (!$comment) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Post not found '
+            ], 400);
+        }
+
+        return response()->json([
+            'success' => true,
+            'data' => $comment->toArray()
+        ], 400);
     }
 
     /**
@@ -69,19 +81,50 @@ class CommentController extends Controller
      * @param  \App\Models\Comment $comment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Comment $comment)
+    public function update(Request $request, Comment $id)
     {
-        //
-    }
+        $comment = auth()->user()->comments()->find($id);
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Comment $comment
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Comment $comment)
+        if (!$comments) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Comment not found'
+            ], 400);
+        }
+
+        $updated = $post->fill($request->all())->save();
+
+        if ($updated)
+            return response()->json([
+                'success' => true
+            ]);
+        else
+            return response()->json([
+                'success' => false,
+                'message' => 'Post can not be updated'
+            ], 500);
+    
+    }
+    public function destroy($id)
     {
-        //
+        $comment = auth()->user()->posts()->find($id);
+
+        if (!$comment) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Comment not found'
+            ], 400);
+        }
+
+        if ($comment->delete()) {
+            return response()->json([
+                'success' => true
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'comment can not be deleted'
+            ], 500);
+        }
     }
 }
