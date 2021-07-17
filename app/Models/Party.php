@@ -15,7 +15,7 @@ class Party extends Model
     ];
 
     public function message (){
-        return $this -> hasMany(Message::class);
+        return $this -> hasMany(Comments::class);
     }
 
     public function partyuser (){
