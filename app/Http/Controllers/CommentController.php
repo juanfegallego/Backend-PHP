@@ -30,25 +30,32 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
+        $user = auth()->user();
+
         $this->validate($request, [
             'message' => 'required',
-            'description' => 'required'
+            'party_id' => 'required'
         ]);
 
-        $comment = new Comment();
-        $comment->title = $request->title;
-        $comment->description = $request->description;
+        $party = Comment::create ([
+            'message' => $request -> message,
+            'user_id' => $user->id,
+            'party_id' => $request -> party_id,
+        ]);
 
-        if (auth()->user()->comments()->save($comment))
-            return response()->json([
+        if ($party) {
+
+            return response() ->json([
                 'success' => true,
-                'data' => $comment->toArray()
-            ]);
-        else
-            return response()->json([
-                'success' => false,
-                'message' => 'Comment not added'
-            ], 500);
+                'data' => $party
+            ], 200);
+    
+        }
+
+        return response() ->json([
+            'success' => false,
+            'message' => 'Party not added',
+        ], 500);
     }
 
     /**
@@ -59,19 +66,66 @@ class CommentController extends Controller
      */
     public function show($id)
     {
-        $comment = auth()->user()->posts()->find($id);
+        $user = auth()->user();
 
-        if (!$comment) {
-            return response()->json([
+        if($user->id === 1){
+            
+            $comment = Comment::where('user_id', '=', $id)->get();
+
+            if(!$comment){
+    
+                return response() ->json([
+                    'success' => false,
+                    'message' => 'Messages not found',
+                ], 400);
+    
+            } else if ($comment->isEmpty()) {
+            
+                return response() ->json([
+                    'success' => false,
+                    'message' => 'Messages not found',
+                    ], 400);
+    
+            } 
+    
+            return response() ->json([
+                'success' => true,
+                'data' => $comment,
+            ], 200);
+    
+        } else {
+    
+            return response() ->json([
                 'success' => false,
-                'message' => 'Post not found '
+                'message' => 'You do not have permision.',
             ], 400);
+    
         }
+    }
 
-        return response()->json([
+    public function byparty($id)
+    {
+        $comment = Comment::where('party_id', '=', $id)->get();
+
+        if(!$comment){
+
+            return response() ->json([
+                'success' => false,
+                'message' => 'Messages not found',
+            ], 400);
+
+        } else if ($message->isEmpty()) {
+            
+            return response() ->json([
+                'success' => false,
+                'message' => 'Messages not found',
+                ], 400);
+
+        }        
+        return response() ->json([
             'success' => true,
-            'data' => $comment->toArray()
-        ], 400);
+            'data' => $message,
+        ], 200);
     }
 
     /**
