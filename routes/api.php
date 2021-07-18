@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PassportAuthController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\GameController;
+use App\Http\Controllers\PartyController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,9 +28,19 @@ Route::middleware('auth:api')->group(function(){
 
     Route::resource('comment', CommentController::class);
 
+    //User
+    Route::post('logout', [UserController::class, 'logout']);
+    Route::post('users/all', [UserController::class, 'all']);
+    Route::resource('users', UserController::class);
+
     //CRUD of Game
     Route::post('game', [GameController::class, 'store']);
     Route::put('game', [GameController::class, 'update']);
     Route::get('game/{id}', [GameController::class, 'show']);
     Route::delete('game', [GameController::class, 'destroy']);
+
+
+    //Party
+    Route::resource('parties', PartyController::class);
+    Route::get('parties/name/{name}', [PartyController::class, 'byname']);
 });

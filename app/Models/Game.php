@@ -9,9 +9,11 @@ class Game extends Model
 {
     
     protected $fillable = [
-        'message',
-        'party_id',
-        'user_id'
+        'title',
+        'image_url',
+        'url',
+        // 'party_id',
+        // 'user_id'
     ];
 
 
