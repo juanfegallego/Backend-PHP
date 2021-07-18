@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Game;
 use Illuminate\Http\Request;
 
 class GameController extends Controller
@@ -41,13 +42,9 @@ class GameController extends Controller
     public function store(Request $request)
     {
 
-        $user = auth()->user();
-
-        if($user->id === 1){
-
             $this->validate( $request , [
                 'title' => 'required',
-                'thumbnail_url' => 'required',
+                'image_url' => 'required',
                 'url' => 'required',
 
             ]);
@@ -55,32 +52,26 @@ class GameController extends Controller
             $game = Game::create ([
     
                 'title' => $request -> title,
-                'thumbnail_url' => $request -> thumbnail_url,
+                'image_url' => $request -> image_url,
                 'url' => $request -> url,
             ]);
     
-            if($game){
-    
+            if(!$game){
+                
                 return response() ->json([
-                    'success' => true,
-                    'data' => $game
-                ], 200);
-    
+                    'success' => false,
+                    'message' => 'Game not added',
+                ], 500);
             }
+
+            return response() ->json([
+                'success' => true,
+                'data' => $game
+            ], 200);
     
-            return response() ->json([
-                'success' => false,
-                'message' => 'Game not added',
-            ], 500);
+            
 
-        } else {
 
-            return response() ->json([
-                'success' => false,
-                'message' => 'You do not have permision.',
-            ], 400);
-
-        }
     }
 
     /**
