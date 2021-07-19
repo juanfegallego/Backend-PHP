@@ -132,7 +132,7 @@ Join the party
 
 <b>Models Relation</B>
 
-<img src="../BackLaravel/resources/img/diagrama.png" alt="diagrama"/>
+<img src="resources/img/diagrama.png" alt="diagrama"/>
 
 </details>
 
