@@ -129,10 +129,10 @@ Create comment
 Join the party
 
     POST api/partyUser/entry
-    
+
 <b>Models Relation</B>
 
-<img src="../BackLaravel/resources/img/diagrama.png"/>
+<img src="../BackLaravel/resources/img/diagrama.png" alt="diagrama"/>
 
 </details>
 
