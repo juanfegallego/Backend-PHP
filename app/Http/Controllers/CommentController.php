@@ -33,14 +33,15 @@ class CommentController extends Controller
         $user = auth()->user();
 
         $this->validate($request, [
-            'message' => 'required',
-            'party_id' => 'required'
+            'title' => 'required',
+            'parties_id' => 'required'
         ]);
 
         $party = Comment::create ([
-            'message' => $request -> message,
-            'user_id' => $user->id,
-            'party_id' => $request -> party_id,
+            'title' => $request->title,
+            'description' => $request->description,
+            'user_id' => $request->user_id,
+            'parties_id' => $request -> parties_id,
         ]);
 
         if ($party) {
@@ -66,66 +67,7 @@ class CommentController extends Controller
      */
     public function show($id)
     {
-        $user = auth()->user();
-
-        if($user->id === 1){
-            
-            $comment = Comment::where('user_id', '=', $id)->get();
-
-            if(!$comment){
-    
-                return response() ->json([
-                    'success' => false,
-                    'message' => 'Messages not found',
-                ], 400);
-    
-            } else if ($comment->isEmpty()) {
-            
-                return response() ->json([
-                    'success' => false,
-                    'message' => 'Messages not found',
-                    ], 400);
-    
-            } 
-    
-            return response() ->json([
-                'success' => true,
-                'data' => $comment,
-            ], 200);
-    
-        } else {
-    
-            return response() ->json([
-                'success' => false,
-                'message' => 'You do not have permision.',
-            ], 400);
-    
-        }
-    }
-
-    public function byparty($id)
-    {
-        $comment = Comment::where('party_id', '=', $id)->get();
-
-        if(!$comment){
-
-            return response() ->json([
-                'success' => false,
-                'message' => 'Messages not found',
-            ], 400);
-
-        } else if ($message->isEmpty()) {
-            
-            return response() ->json([
-                'success' => false,
-                'message' => 'Messages not found',
-                ], 400);
-
-        }        
-        return response() ->json([
-            'success' => true,
-            'data' => $message,
-        ], 200);
+        //
     }
 
     /**

@@ -16,20 +16,10 @@ class PartyController extends Controller
     {
         $parties = Party::all();
 
-        if(!$parties){
-
-            return response() ->json([
-                'success' => false,
-                'message' => 'Parties not found',
-            ], 400);
-
-        }
-
-        return response() ->json([
+        return response()->json([
             'success' => true,
-            'data' => $parties,
-        ]);
-
+            'data' => $parties
+        ], 200);
     }
 
     /**

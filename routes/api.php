@@ -7,6 +7,7 @@ use App\Http\Controllers\PassportAuthController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\PartyController;
+use App\Http\Controllers\PartyUserController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -34,6 +35,7 @@ Route::middleware('auth:api')->group(function(){
     Route::resource('users', UserController::class);
 
     //CRUD of Game
+    Route::resource('game', GameController::class);
     Route::post('game', [GameController::class, 'store']);
     Route::put('game', [GameController::class, 'update']);
     Route::get('game/{id}', [GameController::class, 'show']);
@@ -43,4 +45,10 @@ Route::middleware('auth:api')->group(function(){
     //Party
     Route::resource('parties', PartyController::class);
     Route::get('parties/name/{name}', [PartyController::class, 'byname']);
+    Route::get('parties/{id}', [PartyController::class, 'show']);
+
+    //PartyUser
+    Route::resource('partyUser', PartyUserController::class);
+    Route::post('partyUser/entry', [PartyUserController::class, 'entryPArty']);
+
 });

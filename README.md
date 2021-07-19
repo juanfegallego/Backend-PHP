@@ -7,56 +7,144 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
+<a name="top"></a>
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+<h1>Chat  videogames App - Backend</h1>
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+🧐 [About](#id1)   
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+💻 [Technologys](#id2)
 
-## Learning Laravel
+:clipboard: [Instructions](#id3)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+⚙️ [Endpoints](#id5)
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
-## Laravel Sponsors
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
 
-### Premium Partners
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
+---
 
-## Contributing
+<a name="id1"></a>
+## **About**
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+This is the backend for a chat aplication.
 
-## Code of Conduct
+This project is part of the Full Stack Developer Bootcamp taught by [GeeksHubs Academy](https://bootcamp.geekshubsacademy.com/).
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+---
+**Working time on the project**
+**Start Date:** 05/ july /2021
+**Deadline:** 19/ july / 2021
 
-## Security Vulnerabilities
+**Made by:**
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+* [Juan Felipe Porras Gallego](https://github.com/juanfegallego)
 
-## License
+---
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+<a name="id2"></a>
+
+## **Technologies**
+
+These are the technologies with which we have worked in this project:
+<img src="https://upload.wikimedia.org/wikipedia/commons/2/27/PHP-logo.svg" alt="PHP" width="50"/> <img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Laravel.svg" alt="Laravel" width="30"/><img src="https://iconape.com/wp-content/files/ja/89479/png/postman.png" alt="Postman" width="35"/>  <img src="https://miro.medium.com/max/650/1*zzvdRmHGGXONZpuQ2FeqsQ.png" alt="Git" width="35"/> <img src="https://logos-marcas.com/wp-content/uploads/2020/11/GitHub-Logo-650x366.png" alt="GitHub" width="55"/> <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/DBeaver_logo.svg" alt="DBeaver" width="50" /> <img src="https://www.logo.wine/a/logo/MySQL/MySQL-Logo.wine.svg" alt="Mysql" width="60"/> <img src="https://getcomposer.org/img/logo-composer-transparent2.png" alt="composer" width="45"/> <img src="https://www.nicepng.com/png/full/223-2233246_heroku-logo-salesforce-heroku.png" alt="heroku" width="40"/>
+
+
+
+
+<a name="id3"></a>
+***
+## **Instructions**
+<details>
+
+<summary>Click to expand</summary>
+
+<br>
+
+- <b>To install all dependencies</b>
+```
+    $ composer install
+```
+</details> 
+
+<a name="id4"></a>
+## [Backend development](https://github.com/juanfegallego/Backend-PHP)
+
+
+
+
+The project consists of the development of a chat in which players can talk about their favorite video games and share opinions.
+
+The database that I have used is worked with DBeaver and later deployed in heroku
+
+The frontend has these sections:
+
+<a name="id5"></a>
+## **Endpoints**
+<details>
+
+<summary>Click to expand</summary>
+
+
+<br>
+
+<b>USER</B>
+
+
+Register
+
+    POST /api/register 
+Login
+
+    POST /api/login --> Login a created user and returns a token
+
+Show All Users (ONLY ADMIN)
+
+    POST /api/users/all
+
+<b>GAMES</B>
+
+Create Game
+
+     POST /api/game
+
+Find game by ID
+
+    GET /api/game/{ID}
+
+Show all games
+
+    GET /api/game
+
+
+<b>COMMENT</B>
+
+Create comment
+
+    POST /api/comment 
+
+<b>PartyUser</B>
+
+Join the party
+
+    POST api/partyUser/entry
+    
+<b>Models Relation</B>
+
+<img src="../BackLaravel/resources/img/diagrama.png"/>
+
+</details>
+
+
+
+
+
+
+<a name="id5"></a>
+
+<a name="id6"></a>
+
+
+***
+[:top:](#top)

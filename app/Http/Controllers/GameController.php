@@ -82,42 +82,13 @@ class GameController extends Controller
      */
     public function show($id)
     {
-        $user = auth()->user();
-
-        if($user->id === 1){
-            
-            $game = Game::where('id', '=', $id)->get();
-
-            if(!$game){
-    
-                return response() ->json([
-                    'success' => false,
-                    'message' => 'Game not found',
-                ], 400);
-    
-            } else if ($game->isEmpty()) {
-            
-                return response() ->json([
-                    'success' => false,
-                    'message' => 'Game not found',
-                    ], 400);
-    
-            } 
-    
-            return response() ->json([
+        {
+            $game = Game::where('id', $id)->get();
+            return response()->json([
                 'success' => true,
                 'data' => $game,
             ], 200);
-    
-        } else {
-    
-            return response() ->json([
-                'success' => false,
-                'message' => 'You do not have permision.',
-            ], 400);
-    
-        }
-             
+        }             
     }
 
     public function bytitle($title)
@@ -157,47 +128,7 @@ class GameController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user = auth()->user();
-
-        if($user->id === 1){
-
-            $game = Game::where('id', '=', $id);
-
-            if(!$game){
-    
-                return response() ->json([
-                    'success' => false,
-                    'message' => 'Game not found',
-                ], 400);
-    
-            }
-
-            $updated = $game->update([
-                'title' => $request->input('title'),
-                'thumbnail_url' => $request->input('thumbnail_url'),
-                'url' => $request->input('url'),
-            ]);
-    
-            if($updated){
-                return response() ->json([
-                    'success' => true,
-                ]);
-            } else {
-                return response() ->json([
-                    'success' => false,
-                    'message' => 'Game can not be updated',
-                ], 500);
-            }
-     
-
-        } else {
-
-            return response() ->json([
-                'success' => false,
-                'message' => 'You do not have permision.',
-            ], 400);
-
-        }
+        //
     }
 
     /**
@@ -208,42 +139,7 @@ class GameController extends Controller
      */
     public function destroy($id)
     {
-        $user = auth()->user();
-
-        if($user->id === 1){
-
-            $game = Game::where('id', '=', $id);
-
-            if(!$game){
-    
-                return response() ->json([
-                    'success' => false,
-                    'message' => 'Game not found',
-                ], 400);
-    
-            }
-
-            if($game -> delete()) {
-                return response() ->json([
-                    'success' => true,
-                    'message' => 'Game deleted',
-                ], 200);
-                
-            } else {
-                return response() ->json([
-                    'success' => false,
-                    'message' => 'Game can not be deleted',
-                ], 500);
-            }
-     
-
-        } else {
-
-            return response() ->json([
-                'success' => false,
-                'message' => 'You do not have permision.',
-            ], 400);
-
-        }
+        //
     }
+    
 }

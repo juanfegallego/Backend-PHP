@@ -15,24 +15,12 @@ class PartyUserController extends Controller
     public function index()
     {
         $user = auth()->user();
+        $PartyUser = PartyUser::all();
 
-        if($user->id === 1){
-
-            $partyuser = PartyUser::all();
-
-            return response() ->json([
-                'success' => true,
-                'data' => $partyuser,
-            ]);
-
-        } else {
-
-            return response() ->json([
-                'success' => false,
-                'message' => 'You do not have permision.',
-            ], 400);
-
+        if($user ) {
+            return response()->json(['success' => true, 'data' => $PartyUser], 200);
         }
+        return response()->json(['error' => 'You do not have access'], status:400);
     }
 
     /**
@@ -41,32 +29,43 @@ class PartyUserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function entryPArty(Request $request)
+     {
+
         $user = auth()->user();
 
-        $this->validate( $request , [
+        $this->validate($request, [
             'party_id' => 'required',
         ]);
 
-        $partyuser = PartyUser::create ([
-            'user_id' => $user -> id,
-            'party_id' => $request -> party_id,
-        ]);
+        $PartyUser = PartyUser::where('party_id', '=', $request->party_id)->where('user_id', '=', $user->id)->get();
 
-        if ($partyuser) {
+        if ($PartyUser->isEmpty()) {
 
-            return response() ->json([
-                'success' => true,
-                'data' => $partyuser
-            ], 200);
-    
+            $data = PartyUser::create([
+                'user_id' => $user->id,
+                'party_id' => $request->party_id,
+            ]);
+
+            if($data) {
+                return response()->json([
+                    'success' => true,
+                    'data' => $data
+                ], 200);
+            }
+
+        } else {
+
+            return response()->json([
+                'success' => false,
+                'data' => 'you are already at this party :)'
+            ], 400);
         }
+     }
 
-        return response() ->json([
-            'success' => false,
-            'message' => 'Party-User not added',
-        ], 500);
+    public function store(Request $request)
+    {
+        //
     }
 
     /**

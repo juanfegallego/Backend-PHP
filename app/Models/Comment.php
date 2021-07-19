@@ -12,6 +12,8 @@ class Comment extends Model
     protected $fillable = [
         'title',
         'description',
+        'user_id',
+        'parties_id',
     ];
     //  Relacion de un comentario a user
     public function user (){
